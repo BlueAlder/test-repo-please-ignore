@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+ 
+cd /workspace
+ 
+echo "Running on $BRANCH_NAME branch"
+ 
+if [ "$BRANCH_NAME" = "master" ]
+then
+   git tag "$(cat temp/VERSION)"
+   git push --tags
+   echo "Tag created:"
+   git tag -l --points-at HEAD
+else
+    echo "Skipping branch $BRANCH_NAME"
+fi

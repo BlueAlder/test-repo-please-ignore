@@ -1,3 +1,9 @@
 steps:
 - name: 'ubuntu'
   args: ['echo', 'hello world']
+- id: tag_current_version
+    name: "gcr.io/cloud-builders/git"
+    entrypoint: bash
+    args: ["-euo", "pipefail", "ci/tag-current-version"]
+    env:
+      - "BRANCH_NAME=$BRANCH_NAME"
